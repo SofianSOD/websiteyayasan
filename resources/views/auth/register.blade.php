@@ -2,9 +2,23 @@
 
 @section('title', 'Daftar - Yayasan Pembaharuan Indonesia')
 
+@section('styles')
+    <style>
+        @media (max-width: 768px) {
+            .register-container {
+                padding: 40px 15px !important;
+            }
+
+            .register-card {
+                padding: 20px !important;
+            }
+        }
+    </style>
+@endsection
+
 @section('content')
-    <div class="container" style="padding: 80px 20px;">
-        <div
+    <div class="container register-container" style="padding: 80px 20px;">
+        <div class="register-card"
             style="max-width: 500px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #e5e7eb;">
             <h2 style="text-align: center; margin-bottom: 30px; color: var(--text-color);">Daftar Akun Baru</h2>
 

@@ -228,6 +228,48 @@
             font-size: 1.1rem;
             border-radius: 50px;
         }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 450px;
+                border-bottom-left-radius: 40px;
+                margin-bottom: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+                margin-bottom: 16px;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+                margin-bottom: 24px;
+            }
+
+            .btn-large {
+                padding: 12px 28px;
+                font-size: 0.95rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .features,
+            .programs,
+            .news {
+                padding: 60px 0;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .programs,
+            section[style*="background: var(--primary-color)"] {
+                border-radius: 0 40px 0 40px !important;
+            }
+        }
     </style>
 @endsection
 

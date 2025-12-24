@@ -45,7 +45,13 @@
             position: fixed;
             display: flex;
             flex-direction: column;
-            z-index: 100;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.active {
+            display: flex;
+            transform: translateX(0);
         }
 
         .sidebar-brand {
@@ -183,12 +189,17 @@
 
         @media (max-width: 992px) {
             .sidebar {
-                display: none;
+                transform: translateX(-100%);
+                height: 100%;
             }
 
             .main {
                 margin-left: 0;
                 padding: 20px;
+            }
+
+            .menu-toggle {
+                display: block !important;
             }
         }
     </style>
@@ -225,7 +236,10 @@
 
     <main class="main">
         <nav class="top-nav">
-            <h2 style="font-weight: 800; font-size: 1.5rem;">@yield('page_title', 'Dashboard')</h2>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="menu-toggle" style="display: none; font-size: 1.5rem; cursor: pointer;">☰</div>
+                <h2 style="font-weight: 800; font-size: 1.5rem;">@yield('page_title', 'Dashboard')</h2>
+            </div>
             <div class="user-pill">
                 <div class="avatar">{{ substr(Auth::user()->name, 0, 1) }}</div>
                 <span style="font-weight: 600; font-size: 0.9rem;">{{ Auth::user()->name }}</span>
@@ -234,6 +248,26 @@
 
         @yield('content')
     </main>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

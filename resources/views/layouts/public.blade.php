@@ -240,7 +240,7 @@
                 visibility: visible;
                 transform: translateY(0);
             }
-            
+
             .dropdown.active .dropdown-menu {
                 display: block;
             }
@@ -248,9 +248,16 @@
             .menu-toggle {
                 display: block;
             }
-            
+
             .action-area {
-                display: none; /* Hide buttons on mobile for simplicity, or move them into nav-links */
+                display: none;
+            }
+
+            .nav-links li.mobile-only {
+                display: block;
+                margin-top: 10px;
+                border-top: 1px solid #f1f5f9;
+                padding-top: 15px;
             }
         }
 
@@ -299,6 +306,24 @@
             visibility: visible;
             right: 80px;
         }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .wa-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .wa-float svg {
+                width: 25px;
+                height: 25px;
+            }
+        }
     </style>
     @yield('styles')
 </head>
@@ -306,11 +331,11 @@
 <!-- Top Bar / News Ticker -->
 <div
     style="background: var(--footer-bg); color: #fff; padding: 10px 0; font-size: 0.85rem; border-bottom: 2px solid var(--accent-color);">
-    <div class="container" style="display: flex; align-items: center; gap: 20px;">
+    <div class="container" style="display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; overflow: hidden;">
         <span
-            style="background: var(--accent-color); color: var(--footer-bg); padding: 2px 8px; border-radius: 4px; font-weight: 700; text-transform: uppercase; font-size: 0.75rem;">Terbaru</span>
+            style="background: var(--accent-color); color: var(--footer-bg); padding: 2px 8px; border-radius: 4px; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; flex-shrink: 0;">Terbaru</span>
         <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();"
-            style="cursor: pointer;">
+            style="cursor: pointer; flex-grow: 1;">
             Selamat Datang di Sistem Penerimaan Murid LKP Abqary! Pendaftaran Gelombang 1 telah dibuka sampai 31 Januari
             2026.
             Hubungi admin untuk bantuan teknis.
@@ -379,9 +404,15 @@
                 <li><a href="{{ route('gallery') }}">Galeri</a></li>
                 <li><a href="{{ url('/about') }}">Tentang Kami</a></li>
                 <li><a href="{{ url('/contact') }}">Kontak</a></li>
+                <li class="mobile-only" style="display: none;">
+                    <a href="{{ url('/login') }}" class="btn"
+                        style="width: 100%; border: 1px solid #e2e8f0; margin-bottom: 10px; justify-content: center; display: flex;">Masuk</a>
+                    <a href="{{ url('/register') }}" class="btn btn-primary"
+                        style="width: 100%; justify-content: center; display: flex;">Daftar Sekarang</a>
+                </li>
             </ul>
         </nav>
-        <div class="action-area" style="display: flex; gap: 12px; align-items: center;">
+        <div class="action-area" style="gap: 12px; align-items: center; display: flex;">
             <a href="{{ url('/login') }}" class="btn" style="color: var(--text-color); font-weight: 700;">Masuk</a>
             <a href="{{ url('/register') }}" class="btn btn-primary"
                 style="border-radius: 50px; padding: 12px 28px;">Daftar Sekarang</a>
@@ -445,21 +476,21 @@
     </svg>
 </a>
 
-    <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
+<script>
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
+        document.querySelector('.nav-links').classList.toggle('active');
+    });
 
-        // Optional: Dropdown toggle on mobile
-        const dropdowns = document.querySelectorAll('.dropdown');
-        dropdowns.forEach(dropdown => {
-            dropdown.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    this.classList.toggle('active');
-                }
-            });
+    // Optional: Dropdown toggle on mobile
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function () {
+            if (window.innerWidth <= 768) {
+                this.classList.toggle('active');
+            }
         });
-    </script>
+    });
+</script>
 </body>
 
 </html>
